@@ -1,0 +1,5 @@
+# global owners as fallback for anything not matched below
+* @{{authorUsername}}
+
+# one line for each document
+# e.g. /examples/ @{{authorUsername}}

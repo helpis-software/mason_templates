@@ -1,0 +1,71 @@
+name: {{{name}}}
+repository: {{{repository}}}
+packages:
+  - packages/**
+  - .
+
+ignore:
+  - 'packages/**/example'
+  - 'packages/**/examples'
+  - 'examples'
+
+sdkPath: auto
+command:
+  bootstrap:
+    usePubspecOverrides: true
+  version:
+    includeCommitId: true
+    linkToCommits: true
+    workspaceChangelog: true
+    updateGitTagRefs: true
+    includeScopes: true
+    branch: main
+scripts:
+  config:
+    select-package:
+      flutter: true
+    exec: "flutter config --enable-web --enable-macos-desktop --enable-linux-desktop --enable-windows-desktop --enable-ios --enable-android --single-widget-reload-optimization"
+  get:
+    exec: {{#dart}}dart{{/dart}}{{^dart}}flutter{{/dart}} pub get
+  upgrade:
+    exec: {{#dart}}dart{{/dart}}{{^dart}}flutter{{/dart}} pub upgrade
+  upgradeMajor:
+    exec: {{#dart}}dart{{/dart}}{{^dart}}flutter{{/dart}} pub upgrade --major-versions
+  format_check:
+    exec: dart format --set-exit-if-changed .
+  format:
+    exec: dart format --fix .
+  lint:
+    exec: dart fix --dry-run
+  fix:
+    exec: dart fix --apply
+  analyze:
+    exec: dart analyze --fatal-infos
+  test:
+    exec: {{#dart}}dart{{/dart}}{{^dart}}flutter{{/dart}} test
+  test_integration:
+    select-package:
+      flutter: true
+    exec: flutter drive
+  test_benchmark:
+    select-package:
+      flutter: true
+    exec: flutter test test_benchmark
+  test_goldens:
+    select-package:
+      flutter: true
+    exec: flutter test --update-goldens --tags=golden
+  test_coverage:
+    select-package:
+      flutter: true
+    exec: flutter test --coverage --merge-coverage --no-pub
+  gen_coverage:
+    exec: "$MELOS_ROOT_PATH/tool/combine_coverage.sh"
+  gen_html_coverage:
+    exec: "genhtml $MELOS_ROOT_PATH/coverage/lcov.info -o $MELOS_ROOT_PATH/coverage/html"
+  build_debug:
+    exec: {{#dart}}dart compile{{/dart}}{{^dart}}flutter build{{/dart}} -v $1
+  build_release:
+    exec: {{#dart}}dart compile{{/dart}}{{^dart}}flutter build{{/dart}} -v --release $1
+  fastlane:
+    run: bundle exec fastlane $1

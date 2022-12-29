@@ -1,0 +1,81 @@
+name: monorepo
+description: A new brick that creates a structured monorepo based on helpis internal architectural preferences.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.39 <0.1.0"
+
+# Variables specify dynamic values that your brick depends on.
+# Zero or more variables can be specified for a given brick.
+# Each variable has:
+#  * a type (string, number, boolean, enum, or array)
+#  * an optional short description
+#  * an optional default value
+#  * an optional list of default values (array only)
+#  * an optional prompt phrase used when asking for the variable
+#  * a list of values (enums only)
+vars:
+  dart:
+    type: boolean
+    default: false
+  hasFlavors:
+    type: boolean
+    default: false
+  flavors:
+    type: array
+    default:
+      - 'development'
+    values:
+      - 'development'
+      - 'production'
+      - 'staging'
+  name:
+      type: string
+      default: 'phOS'
+  author:
+    type: string
+    default: 'Ilias Kapareliotis'
+  authorUsername:
+    type: string
+    default: 'helpis-software'
+  description:
+    type: string
+    default: 'My cool description'
+  version:
+    type: string
+    default: '1.0.0+1'
+  repository:
+    type: string
+    default: 'https://github.com/helpis-software/phos'
+  homepage:
+    type: string
+    default: 'https://phos.helpis.dev'
+  org:
+    type: string
+    default: 'dev.helpis'
+  IDE:
+    type: enum
+    default: 'idea'
+    values:
+      - 'idea'
+      - 'vscode'
+  platforms:
+    type: array
+    default:
+      - 'android'
+      - 'ios'
+      - 'web'
+      - 'macos'
+      - 'windows'
+      - 'linux'
+    values:
+      - 'android'
+      - 'ios'
+      - 'web'
+      - 'macos'
+      - 'windows'
+      - 'linux'
+  revolt:
+    type: string
+    default: ''

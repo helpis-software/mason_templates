@@ -1,0 +1,8 @@
+arb-dir: packages/common/localization
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: {{#pascalCase}}{{{name}}}{{/pascalCase}}Localizations
+nullable-getter: false
+use-deferred-loading: true
+synthetic-package: false
+output-dir: packages/common/localization/
